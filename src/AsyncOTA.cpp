@@ -45,10 +45,10 @@ const char* OTA_HTML =
 
 AsyncOtaClass::AsyncOtaClass() {}
 
-void AsyncOtaClass::begin(AsyncWebServer* server) {
+void AsyncOtaClass::begin(AsyncWebServer* server, const char* url) {
   _server = server;
 
-  _server->on("/ota", HTTP_GET, [&](AsyncWebServerRequest* request) {
+  _server->on(url, HTTP_GET, [&](AsyncWebServerRequest* request) {
     AsyncWebServerResponse* response =
         request->beginResponse_P(200, "text/html", OTA_HTML);
     response->addHeader("Connection", "close");

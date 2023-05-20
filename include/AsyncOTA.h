@@ -13,7 +13,7 @@ class AsyncOtaClass {
   void onOTAStart(void callable(void));
   void onOTAProgress(void callable(void));
   void onOTAEnd(void callable(void));
-  void begin(AsyncWebServer *server);
+  void begin(AsyncWebServer *server, const char *url = "/ota");
 
  private:
   AsyncWebServer *_server;
