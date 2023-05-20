@@ -24,10 +24,10 @@ lib_deps = https://github.com/mikaeltulldahl/AsyncOTA.git
 - Copy the file "platformio_upload.py" from this repository into the same folder as your `platformio.ini` file
 - Set the upload method for your project in `platformio.ini`:
 
-```
+```ini
 extra_scripts = platformio_upload.py
 upload_protocol = custom
-upload_url = <your upload URL, such as http://192.168.1.123/update>
+custom_ota_upload_url = <your upload URL, such as http://192.168.1.123/update>
 ;custom_ota_upload_url = http://<my_hostname>.local/update ; with mDNS
 ``` 
 
