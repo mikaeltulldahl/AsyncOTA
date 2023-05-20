@@ -1,15 +1,10 @@
 #ifndef ASYNC_OTA_H_
 #define ASYNC_OTA_H_
 
-#include "Arduino.h"
-#include "stdlib_noniso.h"
-
-#define HARDWARE "ESP32"
 #include <ESPAsyncWebServer.h>
 
+#include "Arduino.h"
 #include "Update.h"
-#include "WiFi.h"
-#include "WiFiClient.h"
 
 class AsyncOtaClass {
  public:

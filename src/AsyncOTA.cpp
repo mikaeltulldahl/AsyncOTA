@@ -58,7 +58,6 @@ void AsyncOtaClass::begin(AsyncWebServer* server) {
   _server->on(
       "/update", HTTP_POST,
       [&](AsyncWebServerRequest* request) {
-        Serial.println("OTA /update HTTP_POST onRequest");
         AsyncWebServerResponse* response = request->beginResponse_P(
             200, "text/plain", (Update.hasError()) ? "FAIL" : "OK");
         response->addHeader("Connection", "close");
@@ -75,6 +74,13 @@ void AsyncOtaClass::begin(AsyncWebServer* server) {
         //  Actual OTA Download
         if (index == 0) {
           Serial.printf("Update Received: %s\n", filename.c_str());
+          if (!request->hasParam("MD5", true)) {
+            return request->send(400, "text/plain", "MD5 parameter missing");
+          }
+
+          if (!Update.setMD5(request->getParam("MD5", true)->value().c_str())) {
+            return request->send(400, "text/plain", "MD5 parameter invalid");
+          }
           if (_preUpdateRequired) preUpdateCallback();
           if (filename == "filesystem") {
             // start with max available size
@@ -98,8 +104,9 @@ void AsyncOtaClass::begin(AsyncWebServer* server) {
         if (final) {
           size_t totalBytes = Update.progress();
           if (Update.end(true)) {
-            Serial.printf("\nUpdate Success!\nTotal size: %u bytes.\nRebooting...\n",
-                          totalBytes);
+            Serial.printf(
+                "\nUpdate Success!\nTotal size: %u bytes.\nRebooting...\n",
+                totalBytes);
           } else {
             Update.printError(Serial);
           }
