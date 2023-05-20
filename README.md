@@ -1,27 +1,53 @@
 # AsyncOTA
-ESP32 OTA update using a browser or PlatformIO
+Minimalist ESP32 Over-The-Air(OTA) firmware update using a browser or PlatformIO, using TCP and AsyncWebServer.
 
-## Installation
+## Usage
 
-### PlatformIO
-If you are using PlatformIO, you can install the latest version of the library using the PlatformIO Library Manager or by adding `ESPAsyncOTA` to your `platformio.ini` file like:
+### platformio.ini
+If you are using PlatformIO, you can install the latest version of the library using the PlatformIO Library Manager or by adding `AsyncOTA` to your `platformio.ini` file like:
 ```ini
 ; platformio.ini
 [env:esp32]
 platform = espressif32
 board = esp32dev
 framework = arduino
-lib_deps = https://github.com/mikaeltulldahl/AsyncOTA.git
+lib_deps = mikaeltulldahl/AsyncOta@^1.0.0
 ```
 
-### PlatformIO Manual Method
-- Go to http://<your_upload_URL>/ota> or http://<my_hostname>.local/ota if you enabled mDNS
-- navigate and select .pio\build\esp32\firmware.bin
-- click Update
+### Setup
 
-### PlatformIO Automatic Method
+```c++
+#include "AsyncOTA.h"
+#include "WIFI.h"
 
-- Copy the file "platformio_upload.py" from this repository into the same folder as your `platformio.ini` file
+AsyncWebServer server(80);
+
+void setup(){
+  // Start wifi first
+  WiFi.mode(WIFI_STA);
+  WiFi.begin("my wifi name", "my wifi password");
+  while (WiFi.status() != WL_CONNECTED) { delay(500);}
+  
+  // Start OTA server
+  AsyncOTA.begin(&server);
+  server.begin();
+}
+```
+### Loop
+Nothing needed here.
+```c++
+void loop(){
+}
+```
+
+### Browser Upload
+- Go to `http://<your_URL>/ota>` or `http://<my_hostname>.local/ota` if you enabled mDNS
+- Navigate to and select `.pio\build\<my_env_name>\firmware.bin`.
+- Click Update
+
+### PlatformIO Upload
+
+- Copy the file `platformio_upload.py` from this repository into the same folder as your `platformio.ini` file
 - Set the upload method for your project in `platformio.ini`:
 
 ```ini
