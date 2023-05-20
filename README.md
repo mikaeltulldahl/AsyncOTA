@@ -11,7 +11,7 @@ If you are using PlatformIO, you can install the latest version of the library u
 platform = espressif32
 board = esp32dev
 framework = arduino
-lib_deps = mikaeltulldahl/AsyncOta@^1.0.0
+lib_deps = mikaeltulldahl/AsyncOta@^1.0.1
 ```
 
 ### Setup
