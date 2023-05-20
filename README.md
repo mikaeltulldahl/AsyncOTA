@@ -56,9 +56,33 @@ upload_protocol = custom
 custom_ota_upload_url = <your upload URL, such as http://192.168.1.123/update>
 ;custom_ota_upload_url = http://<my_hostname>.local/update ; with mDNS
 ``` 
+- Click the Upload button in PlatformIO
+
+### Tips'n'Tricks
+It's useful to have multiple envs in `platformio.ini` to specify different upload modes. Here's a complete example:
+```ini
+; platformio.ini
+[esp32_base]
+platform = espressif32
+board = esp32dev
+framework = arduino
+lib_deps = mikaeltulldahl/AsyncOta@^1.0.1
+
+; Upload over USB
+[env:esp32_USB]
+extends = esp32_base
+
+; Upload over WIFI
+[env:esp32_OTA]
+extends = esp32_base
+extra_scripts = platformio_upload.py
+upload_protocol = custom
+custom_ota_upload_url = <your upload URL, such as http://192.168.1.123/update>
+;custom_ota_upload_url = http://<my_hostname>.local/update ; with mDNS
+```
 
 ### Troubleshooting
-If you don't know the URL, download an IP scanner like [Angry IP Scanner](https://angryip.org/).
+If you don't know the URL your esp32 is hosting at, find it using an IP scanner like [Angry IP Scanner](https://angryip.org/).
 
 ## Credits
 
