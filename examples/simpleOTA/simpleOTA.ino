@@ -33,12 +33,14 @@ void setup(){
     Serial.printf("Access at http://%s.local\n", hostname);
   }
 
+  // Show a link to OTA page at http://myEsp32.local
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
         String html = "<html><body>";
     html += "<a href=\"/ota\">Update Software</a>";
     html += "</body></html>";
     request->send(200, "text/html", html);
   });
+
   AsyncOTA.begin(&server);
   server.begin();
 }

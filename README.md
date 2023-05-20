@@ -15,7 +15,7 @@ lib_deps = https://github.com/mikaeltulldahl/AsyncOTA.git
 ```
 
 ### PlatformIO Manual Method
-- Go to http://<your upload URL>/ota> or http://<my_hostname>.local/ota if you enabled mDNS
+- Go to http://<your_upload_URL>/ota> or http://<my_hostname>.local/ota if you enabled mDNS
 - navigate and select .pio\build\esp32\firmware.bin
 - click Update
 
