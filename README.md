@@ -11,7 +11,7 @@ If you are using PlatformIO, you can install the latest version of the library u
 platform = espressif32
 board = esp32dev
 framework = arduino
-lib_deps = mikaeltulldahl/AsyncOta@^1.0.1
+lib_deps = mikaeltulldahl/AsyncOta@^1.0.2
 ```
 
 ### Setup
@@ -66,7 +66,7 @@ It's useful to have multiple envs in `platformio.ini` to specify different uploa
 platform = espressif32
 board = esp32dev
 framework = arduino
-lib_deps = mikaeltulldahl/AsyncOta@^1.0.1
+lib_deps = mikaeltulldahl/AsyncOta@^1.0.2
 
 ; Upload over USB
 [env:esp32_USB]
